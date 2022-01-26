@@ -6,7 +6,6 @@ import axios from "axios";
 
 
 
-
       
       
      
@@ -48,6 +47,7 @@ return (
 
 
 <body>
+  
         <ChakraProvider >
          
         <nav id="navbars" className="navbar navbar-expand-lg navbar-light bg-light">
@@ -60,7 +60,7 @@ return (
      
      
       <li className="nav-item">
-        <a className="nav-link" id="lista" href="#">Lista de Usuários</a>
+        <a className="nav-link" id="lista" href="/usuarios">Lista de Usuários</a>
       </li>
       <li className="nav-item">
         <a className="nav-link"  id="reg" href="#">Registros</a>
@@ -97,6 +97,7 @@ return (
         </ChakraProvider>
   
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous"></link>
+    
     </body>
       )
    }   

@@ -1,20 +1,19 @@
 import { ColorModeScript } from "@chakra-ui/react"
 import * as React from "react"
 import ReactDOM from "react-dom"
-import  Main  from './Components/Pages/Main'
-import  Teste  from "./Components/Pages/Teste"
 import  GlobalStyle    from './Components/Styles'
+import { BrowserRouter } from "react-router-dom"
+import Rotas from "./routes"
 
-import { BrowserRouter, BrowserRouter as Router, Route, Routes } from "react-router-dom"
-import App from "./App"
+
 
 
 ReactDOM.render(
   <React.StrictMode>
   <ColorModeScript />
   <BrowserRouter />
-  <Main />
-  <Teste />
+  <Rotas />
+  <BrowserRouter />
   <GlobalStyle />
   
   </React.StrictMode>,
