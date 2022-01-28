@@ -29,10 +29,6 @@ overflow-y:hidden;
     }
 }
 
-.navbar {
-
-}
-
 
 
 

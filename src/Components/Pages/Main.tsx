@@ -1,14 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-
 import React from "react";
 import { ChakraProvider, VStack,  Input,  HStack, Button, AspectRatio } from "@chakra-ui/react"
 import axios from "axios";
-
-
-
-      
-      
-     
+import { CheckIcon } from '@chakra-ui/icons'
 
 function Main() {
   const [nome, setNome] = React.useState('');
@@ -17,18 +11,26 @@ function Main() {
   const [estado, setEstado] =  React.useState('');
   const [cidade, setCidade] =  React.useState('');
   const SendApi  = ()  =>{
-    axios.post("http://localhost:3000/usuarios/buscar", {
-    InsertNome: nome,
-    InsertEmail: email,
-    InsertSenha: senha,
-    InsertEstado: estado,
-    InsertCidade: cidade,
+    axios.post("http://localhost:3001/usuarios/adicionar", {
+    nome: nome,
+    email: email,
+    senha: senha,
+    estado: estado,
+    cidade: cidade,
     
   })
+
 }
+
+function Refresh() {
+  window.location.reload();
+}
+
+
 function func() {
   SendApi();
   onSubmit();
+  Refresh();
   
 }
 const onSubmit  = () => {
@@ -42,6 +44,8 @@ const onSubmit  = () => {
   console.log(data)
 }
 
+
+
 return (
 
 
@@ -50,8 +54,8 @@ return (
   
         <ChakraProvider >
          
-        <nav id="navbars" className="navbar navbar-expand-lg navbar-light bg-light">
-  <a className="navbar-brand" href="#">Formulário</a>
+        <nav className="navbar navbar-expand-lg navbar-light bg-primary">
+  <a  className="navbar-brand" href="#">Formulário</a>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
@@ -60,13 +64,12 @@ return (
      
      
       <li className="nav-item">
-        <a className="nav-link" id="lista" href="/usuarios">Lista de Usuários</a>
+        <a className="nav-link" id="lista" href="http://localhost:3000/lista">Lista de Usuários</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link"  id="reg" href="#">Registros</a>
+      
       </li>
      
-      <Button left={1470} colorScheme="blue">Editar</Button>
      
     </ul>
   </div>
@@ -81,7 +84,7 @@ return (
       <label htmlFor ="nome"   className= "nome"></label>
       <HStack>
       <Input focusBorderColor="pink.500" type={"email"}  backgroundImage={"white"} width={900} color={"black"} left={-2} bgColor={"#c2f0f0"} placeholder='Email' onChange={(e) => setEmail(e.target.value)}  size='md'></Input>
-        <Button onClick={func} backgroundColor={"blue.500"} color={"white"}>Salvar</Button>
+        <Button onClick={func} backgroundColor={"blue.500"} color={"white"}>Enviar</Button>
       </HStack>
       <label htmlFor ="email"   className= "email"></label>
       <Input type={"password"}  focusBorderColor="pink.500" backgroundImage={"white"} width={1000} color={"black"} bgColor={"#c2f0f0"} placeholder='Senha' onChange={(e) => setSenha(e.target.value)} size='md' />
@@ -92,12 +95,12 @@ return (
       <label htmlFor ="cidade"   className= "cidade"></label>
         </VStack>
         </AspectRatio>
-    </div>x
+    </div>
     </form>
         </ChakraProvider>
   
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous"></link>
-    
+   
     </body>
       )
    }   
