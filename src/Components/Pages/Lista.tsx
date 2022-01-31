@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 
@@ -6,21 +7,14 @@ import axios from "axios";
 import { Center, Wrap, WrapItem } from '@chakra-ui/react'
 import {InputNumber, Table, Typography} from 'antd';
 import { Input,  Popconfirm, Form } from 'antd';
-import useSWR from "swr";
 import { DeleteOutlined, } from '@ant-design/icons';
 import { EditOutlined } from '@ant-design/icons';
 import { useFetch } from "../../UseFetch";
-
-
-
-
+import useSWR, { SWRConfig } from 'swr'
 
 export default function App() {
     
-  
-    
-    
-    interface RoomModel {
+  interface RoomModel {
     id: string; 
     nome: string;
     email: string;
@@ -36,24 +30,14 @@ export default function App() {
     age: number;
     address: string;
  
-    
-}
+  }
 
-
-    const [rooms, setRooms] = useState<RoomModel[]>([]);
-
-     
-          const { data } = useFetch('http://localhost:3001/usuarios/buscar')
-         
+  const [rooms, setRooms] = useState<RoomModel[]>([]);
+  
+  const { data} = useFetch("http://localhost:3001/usuarios/buscar") 
           
-          
-          console.log(data)
-
-
-
-    
-        
-          
+            console.log(data)
+           
           interface Item {
 
             key: string;
@@ -71,6 +55,7 @@ export default function App() {
             cidade: string;
             endereco: string;
           }
+          
           const originData: RoomModel[] = [];
             originData.push({
               key: toString(),
@@ -89,22 +74,6 @@ export default function App() {
               endereco: ''
             });
           
-              
-              
-              
-         
-              
-              
-              
-              
-              
-  
-   
-
-
-        
-
-
             interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
             editing: boolean;
             dataIndex: string;
@@ -165,11 +134,7 @@ export default function App() {
               setEditingKey('');
             };
             
-            
-            
-           
-          
-            const save = async (key: React.Key) => {
+          const save = async (key: React.Key) => {
               try {
                 const row = (await form.validateFields()) as RoomModel;
           
@@ -188,10 +153,7 @@ export default function App() {
                   setRooms(newData);
                   setEditingKey('');
                   axios.post("http://localhost:3001/usuarios/alterar",{newData}).then (() => {
-                    console.log(newData[0]);
-
-                  
-                    
+                    console.log(newData[0])
                   })
                 }
               }
@@ -200,15 +162,11 @@ export default function App() {
               }
             };
             
-            
-            const deleterow = async (key: string) => {
-
-              
-              axios.delete("http://localhost:3001/usuarios/deletar",{data: {key}})
+          const deleterow = async (key: string) => {
+          axios.delete("http://localhost:3001/usuarios/deletar",{data: {key}})
               .then(response => {
                 console.log(response)
-               
-              })
+               })
      
               }
                     
@@ -219,51 +177,41 @@ export default function App() {
                 width: '90px',
                 editable: true,
 
-                                
-                
-               
               },
+            
               {
                 title: 'Nome',
                 dataIndex: 'nome',
                 width: '21000px',
                 editable: true,
                
-
               },
               {
                 title: 'Email',
                 dataIndex: 'email',
                 width: '21000px',
                 editable: true,
-               
-
-              },
-              {
+               },
+              
+               {
                 title: 'Senha',
                 dataIndex: 'senha',
                 width: '21000px',
                 editable: true,
-               
-
-              },
+               },
             
-              
               {
                 title: 'Estado',
                 dataIndex: 'estado',
                 width: '21000px',
                 editable: true,
-               
-
-              },
-              {
+               },
+              
+               {
                 title: 'Cidade',
                 dataIndex: 'cidade',
                 width: '21000px',
                 editable: true,
-               
-
               },
               
               {
@@ -321,9 +269,7 @@ export default function App() {
                     
                   ];
              
-
-          
-            const mergedColumns = columns.map(col => {
+           const mergedColumns = columns.map(col => {
               if (!col.editable) {
                 return col;
               }
@@ -361,52 +307,38 @@ export default function App() {
           };
 
           return (
+            <SWRConfig value={{refreshInterval: 3000}} > 
+              <body>
+              <ChakraProvider>
+                <nav className="navbar navbar-expand-lg navbar-light bg-primary">
+                  <a className="navbar-brand" href="#">Lista de Usuários</a>
+                  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                  </button>
+                  <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                      <li className="nav-item">
+                        <a className="nav-link" id="lista" href="http://localhost:3000">Formulário</a>
+                      </li>
+                      <li className="nav-item">
 
-            
-      <body>
-        <ChakraProvider>
-            <nav className="navbar navbar-expand-lg navbar-light bg-primary">
-  <a  className="navbar-brand" href="#">Lista de Usuários</a>
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
-  <div className="collapse navbar-collapse" id="navbarNav">
-    <ul className="navbar-nav"> 
-     
-     
-      <li className="nav-item">
-        <a className="nav-link" id="lista" href="http://localhost:3000">Formulário</a>
-      </li>
-      <li className="nav-item">
-      
-      </li>
-     
-      
-    </ul>
-  </div>
-</nav>
-
-            
-        
-           
-</ChakraProvider>
-   
-   
-    
-      <Wrap align='center'  alignItems='center' >
-    <WrapItem >
-  ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ ㅤㅤ<Center w='-30000px' padding={180} h='700px'  bg='red.200'>
-    
-  <VStack  paddingY={100}>
-  <EditableTable/>
-  </VStack>
-  
-            </Center>
-    </WrapItem>                       
-     </Wrap>   
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous"></link>
-
-        </body>
+                      </li>
+                      </ul>
+                  </div>
+                </nav>
+              </ChakraProvider>
+             <Wrap align='center' alignItems='center'>
+                <WrapItem>
+            <Center w='-30000px' padding={180} h='700px' bg='red.200'>
+            <VStack paddingY={100}>
+            <EditableTable />
+              </VStack>
+              </Center>
+      </WrapItem>
+              </Wrap>
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous"></link>
+            </body>
+              </SWRConfig>
      );
 
     };

@@ -2,7 +2,6 @@
 import React from "react";
 import { ChakraProvider, VStack,  Input,  HStack, Button, AspectRatio } from "@chakra-ui/react"
 import axios from "axios";
-import { CheckIcon } from '@chakra-ui/icons'
 
 function Main() {
   const [nome, setNome] = React.useState('');
@@ -21,18 +20,14 @@ function Main() {
   })
 
 }
-
 function Refresh() {
   window.location.reload();
 }
-
-
 function func() {
   SendApi();
   onSubmit();
   Refresh();
-  
-}
+  }
 const onSubmit  = () => {
   const data = {
     nome,
@@ -44,12 +39,7 @@ const onSubmit  = () => {
   console.log(data)
 }
 
-
-
 return (
-
-
-
 <body>
   
         <ChakraProvider >
@@ -61,16 +51,12 @@ return (
   </button>
   <div className="collapse navbar-collapse" id="navbarNav">
     <ul className="navbar-nav"> 
-     
-     
-      <li className="nav-item">
+     <li className="nav-item">
         <a className="nav-link" id="lista" href="http://localhost:3000/lista">Lista de Usuários</a>
       </li>
       <li className="nav-item">
       
       </li>
-     
-     
     </ul>
   </div>
 </nav>
@@ -104,9 +90,8 @@ return (
     </body>
       )
    }   
-
+   
+   export  default Main;
     
  
    
-
-export default Main;
