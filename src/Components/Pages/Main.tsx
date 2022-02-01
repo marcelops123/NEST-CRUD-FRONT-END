@@ -35,18 +35,14 @@ function messageInfo() {
 
 
 
-function botao() {
-    
-    
-}
+
 
 
 function func() {
   SendApi();
   onSubmit();
   messageInfo();
-  botao();
-  
+ 
 }
 
 
@@ -93,7 +89,7 @@ return (
       <label htmlFor ="nome"   className= "nome"></label>
       <HStack>
       <Input focusBorderColor="pink.500" type={"email"}  backgroundImage={"white"} width={900} color={"black"} left={-2} bgColor={"#c2f0f0"} placeholder='Email' onChange={(e) => setEmail(e.target.value)}  size='md'></Input>
-      <Button onClick={func} isLoading={false} backgroundColor={"blue.500"} color={"white"}>Enviar</Button>
+      <Button onClick={func}  backgroundColor={"blue.500"} color={"white"}>Enviar</Button>
       </HStack>
       <label htmlFor ="email"   className= "email"></label>
       <Input type={"password"}  focusBorderColor="pink.500" backgroundImage={"white"} width={1000} color={"black"} bgColor={"#c2f0f0"} placeholder='Senha' onChange={(e) => setSenha(e.target.value)} size='md' />
@@ -117,5 +113,3 @@ return (
    }   
    
    export  default Main;
- 
-   
