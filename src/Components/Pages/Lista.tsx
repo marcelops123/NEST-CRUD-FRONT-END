@@ -2,15 +2,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 
-import { ChakraProvider, Button, HStack, VStack } from "@chakra-ui/react"
+import { ChakraProvider, Button, HStack, VStack, AspectRatio } from "@chakra-ui/react"
 import axios from "axios";
 import { Center, Wrap, WrapItem } from '@chakra-ui/react'
-import {InputNumber, Table, Typography} from 'antd';
+import {Alert, InputNumber, Spin, Switch, Table, Typography} from 'antd';
 import { Input,  Popconfirm, Form } from 'antd';
 import { DeleteOutlined, } from '@ant-design/icons';
 import { EditOutlined } from '@ant-design/icons';
 import { useFetch } from "../../UseFetch";
 import useSWR, { SWRConfig } from 'swr'
+import { loadavg } from "os";
 
 export default function App() {
     
@@ -31,12 +32,23 @@ export default function App() {
     address: string;
  
   }
+  class Card extends React.Component {
+    state = { loading: false };
+  
+    toggle = (value: any) => {
+      this.setState({ loading: value });
+    };
+  
+  
+      
+  }
 
   const [rooms, setRooms] = useState<RoomModel[]>([]);
   
-  const { data} = useFetch("http://localhost:3001/usuarios/buscar") 
+  const { data, mutate} = useFetch("http://localhost:3001/usuarios/buscar") 
           
             console.log(data)
+            mutate()
            
           interface Item {
 
@@ -148,12 +160,16 @@ export default function App() {
                   });
                   setRooms(newData);
                   setEditingKey('');
-                } else {
+                } 
+                
+                else {
                   newData.push(row);
                   setRooms(newData);
                   setEditingKey('');
                   axios.post("http://localhost:3001/usuarios/alterar",{newData}).then (() => {
+                    mutate();
                     console.log(newData[0])
+                    
                   })
                 }
               }
@@ -166,9 +182,10 @@ export default function App() {
           axios.delete("http://localhost:3001/usuarios/deletar",{data: {key}})
               .then(response => {
                 console.log(response)
-               })
+                mutate();
+               }
      
-              }
+               ) }
                     
             const columns = [
               {
@@ -330,14 +347,14 @@ export default function App() {
              <Wrap align='center' alignItems='center'>
                 <WrapItem>
             <Center w='-30000px' padding={180} h='700px' bg='red.200'>
-            <VStack paddingY={100}>
-            <EditableTable />
+            <VStack paddingY={100} width={1600}>
+            <EditableTable/>  
               </VStack>
               </Center>
-      </WrapItem>
+            </WrapItem>
               </Wrap>
-              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous"></link>
             </body>
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous"></link>
               </SWRConfig>
      );
 

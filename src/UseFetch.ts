@@ -1,6 +1,6 @@
 import useSWR from "swr";
-import { SWRConfig } from 'swr'
- export function useFetch(url: string) {
+
+export function useFetch(url: string) {
     const {data, error, mutate } = useSWR(url, async url  => {
       
       const response = await fetch(url);

@@ -41,8 +41,8 @@ bottom: 80px;
 width: 1100px;
 background-color: rgba(0, 0, 0, 0.06);
 border-radius: 30px;
-
 color: white
+
 }
 
 #lista{
@@ -53,7 +53,6 @@ color: white
     font-size: 18px
 }
 
-
 .navbar-nav {
     color: gray;
 }
@@ -63,7 +62,9 @@ color: white
 
 `;
 
+export const tabela = styled.table`
 
+`
 
 
 
@@ -73,5 +74,3 @@ color: white
 
 
     
-export const tabela = styled.table`
-`

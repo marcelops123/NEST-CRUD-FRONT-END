@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { ChakraProvider, VStack,  Input,  HStack, Button, AspectRatio } from "@chakra-ui/react"
+import { ChakraProvider, VStack,  Input,  HStack,  AspectRatio, Button } from "@chakra-ui/react"
 import axios from "axios";
-
+import { message, } from 'antd';
 function Main() {
   const [nome, setNome] = React.useState('');
   const [email, setEmail] =  React.useState('');
   const [senha, setSenha] =  React.useState('');
   const [estado, setEstado] =  React.useState('');
   const [cidade, setCidade] =  React.useState('');
+ 
   const SendApi  = ()  =>{
     axios.post("http://localhost:3001/usuarios/adicionar", {
     nome: nome,
@@ -17,17 +18,39 @@ function Main() {
     estado: estado,
     cidade: cidade,
     
+    
   })
 
+  }
+
+function messageInfo() {
+  const key = 'updatable';
+  message.loading({content: 'Enviando dados...', key, duration: 5});
+  setTimeout(() => {
+    message.success({ content: 'Dados enviados com sucesso!', key, duration: 3 });
+  }, 2000);
+  
+};
+
+
+
+
+function botao() {
+    
+    
 }
-function Refresh() {
-  window.location.reload();
-}
+
+
 function func() {
   SendApi();
   onSubmit();
-  Refresh();
-  }
+  messageInfo();
+  botao();
+  
+}
+
+
+  
 const onSubmit  = () => {
   const data = {
     nome,
@@ -70,7 +93,7 @@ return (
       <label htmlFor ="nome"   className= "nome"></label>
       <HStack>
       <Input focusBorderColor="pink.500" type={"email"}  backgroundImage={"white"} width={900} color={"black"} left={-2} bgColor={"#c2f0f0"} placeholder='Email' onChange={(e) => setEmail(e.target.value)}  size='md'></Input>
-        <Button onClick={func} backgroundColor={"blue.500"} color={"white"}>Enviar</Button>
+      <Button onClick={func} isLoading={false} backgroundColor={"blue.500"} color={"white"}>Enviar</Button>
       </HStack>
       <label htmlFor ="email"   className= "email"></label>
       <Input type={"password"}  focusBorderColor="pink.500" backgroundImage={"white"} width={1000} color={"black"} bgColor={"#c2f0f0"} placeholder='Senha' onChange={(e) => setSenha(e.target.value)} size='md' />
@@ -86,12 +109,13 @@ return (
         </ChakraProvider>
   
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous"></link>
-   
+        <link rel="stylesheet" href="dist/ladda-themeless.min.css"></link>
+        <script src="dist/spin.min.js"></script>
+        <script src="dist/ladda.min.js"></script>
     </body>
       )
    }   
    
    export  default Main;
-    
  
    
